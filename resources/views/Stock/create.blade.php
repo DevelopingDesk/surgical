@@ -12,6 +12,7 @@ input[type=text] {
 }
 </style>
 <div class="panel-body">
+	@include('message')
 			<form role="form" method="post" class="form-horizontal" action="{{route('post.stock')}}">
 				{{csrf_field()}}
 							<div class="row">
@@ -98,7 +99,7 @@ input[type=text] {
 				<br>		
 						
 		<div class="row">
-			<div class="col-sm-4 col-sm-offset-10">
+			<div class="col-sm-4 ">
 				<button class="btn-warning btn">Submit</button>
 				<button class="btn-success btn">Cancel</button>
 				

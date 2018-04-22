@@ -24,6 +24,9 @@ class CreateStocksTable extends Migration
             $table->string('rnumber');
             $table->string('location');
             $table->string('advance');
+            $table->string('status_cleaning')->nullable();
+            $table->string('status_coating')->nullable();
+            $table->string('status_finish')->nullable();
             $table->integer('color_id')->unsigned();
             $table->integer('serial_id')->unsigned();
             $table->integer('token_id')->unsigned();

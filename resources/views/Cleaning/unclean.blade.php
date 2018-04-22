@@ -17,17 +17,16 @@
                <th>Product Name</th>
                <th>Product Quantity</th>
                <th>Product Size</th>
-               <th>Customer Name</th>
-               <th>Customer Phone</th>
+               
+             
                <th>Date</th>
-               <th>Receipt Number</th>
-               <th>Location</th>
-               <th>Advance</th>
+               
+               
+               
                <th>Color</th>
-               <th>Serial Number</th>
-               <th>Token Number</th>
-<th>Shift to Cleaning</th>
-<th>Status Coating</th>
+               
+<th>   Cleaning</th>
+<th>Send to Coating</th>
 <th>Status Finish</th>
 
 
@@ -49,32 +48,34 @@
      
         
         
-           @foreach($stock as $cls)
+           @foreach($unclean as $cls)
             <tr>
                 <td>{{$cls->id}}</td>
                 <td>{{$cls->pname}}</td>
                 <td>{{$cls->pquantity}}</td>
                 <td>{{$cls->psize}}</td>
-                <td>{{$cls->cname}}</td>
-                <td>{{$cls->cphone}}</td>
+             
+               
                 <td>{{$cls->date}}</td>
-                <td>{{$cls->rnumber}}</td>
-                <td>{{$cls->location}}</td>
-                <td>{{$cls->advance}}</td>
-                <td>{{$cls->color->name}}</td>
-                <td>{{$cls->serial->name}}</td>
-                <td>{{$cls->token->name}}</td>
+                
+              
+              
+                <td>{{$cls->color_id}}</td>
+                
+                
               @if($cls->status_cleaning==null)
-               <td><input type="checkbox" name="shiftcleaning" value="{{$cls->id}}"></td>
+               <td><input type="checkbox" name="shiftcleaning"></td>
                @else
-               <td>sent to cleaning</td>
+               <td><h6 style="color: green">Recieved for cleaning</h6> </td>
 @endif
 
               @if($cls->status_coating==null)
-<td><h6 style="color: red">Not  in coating</h6></td>
+               <td><input type="checkbox" name="shiftcoating" value="{{$cls->id}}"></td>
+
 @else
 
-<td><h6 style="color: green"> Shifted in coating</h6></td>
+               <td><input type="checkbox" name="shiftcoating" checked="true" value="{{$cls->id}}"></td>
+
               
                @endif
               @if($cls->status_coating==null)
@@ -132,11 +133,12 @@ $('#saveOffer').click(function () {
 });
 
 </script>
+
 <script type="text/javascript" src="{{asset('js/Stock/update.js')}}"></script>
 
 <script type="text/javascript">
 var token='{{Session::token()}}';
-var add='{{route('shift.cleaning')}}';
+var add='{{route('shift.coating')}}';
 
 </script> 
 @endsection
