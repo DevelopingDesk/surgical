@@ -55,4 +55,6 @@ Route::post('get/coat/finish','CoatController@shiftFinish')->name('shift.finish'
 
 //invoice
 
-Route::get('create/invoice','InvoiceController@create')->name('create.invoice');
+Route::get('create/invoice/{id}','InvoiceController@create')->name('create.invoice');
+Route::get('get/store/invoice/{id}','InvoiceController@getStore')->name('getstore.invoice');
+Route::post('post/store/invoice','InvoiceController@postStore')->name('poststore.invoice');
