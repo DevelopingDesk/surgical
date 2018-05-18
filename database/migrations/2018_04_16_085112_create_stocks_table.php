@@ -18,25 +18,21 @@ class CreateStocksTable extends Migration
             $table->string('pname');
             $table->string('pquantity');
             $table->string('psize');
-            $table->string('cname');
-            $table->string('cphone');
-            $table->string('date');
-            $table->string('rnumber');
-            $table->string('location');
-            $table->string('advance');
+           
+          
             $table->string('status_cleaning')->nullable();
             $table->string('status_coating')->nullable();
             $table->string('status_finish')->nullable();
             $table->integer('color_id')->unsigned();
             $table->integer('serial_id')->unsigned();
-            $table->integer('token_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
   $table->foreign('color_id')->references('id')->on('colors')
                 ->onUpdate('cascade')->onDelete('cascade');
 
 $table->foreign('serial_id')->references('id')->on('serials')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-$table->foreign('token_id')->references('id')->on('tokens')
+$table->foreign('customer_id')->references('id')->on('customers')
                 ->onUpdate('cascade')->onDelete('cascade');
 
 

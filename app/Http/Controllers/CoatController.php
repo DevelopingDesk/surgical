@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Stock;
+use App\Customer;
 class CoatController extends Controller
 {
      public function coat(){
+     	$customer=Customer::all();
 $uncoat=Stock::where('status_finish','!=',null)->get();
-return view('Coating.coated')->withcoat($uncoat);
+return view('Coating.coated')->withcoat($uncoat)->withcustomer($customer);
 
 
     }
     public function unCoat(){
-$uncoat=Stock::whereNull('status_finish')->get();
-return view('Coating.uncoated')->withuncoat($uncoat);
+     	$customer=Customer::all();
+
+$uncoat=Stock::whereNotNull('status_coating')->get();
+return view('Coating.uncoated')->withuncoat($uncoat)->withcustomer($customer);
 
 
     }

@@ -2,31 +2,49 @@
 
 @section('content')
 
+<h2 style="color: green;text-align: center;"> <b>Unclean Stock List</h2>
+<table class="table table-hover" style="margin:10px">
+    <thead style="background-color:white">
+       
+    </thead>
+<tbody>
 
-<div class="table-responsive"  data-example-id="contextual-table" >
-    <button class="btn btn-primary pull-right" onclick="printContent('divide')">print</button>	
+     @foreach($customer as $orders) 
+ 
+       <td>
 
-    <center><h2 style="color: red;margin-top: 10px">MAIN INDUSTRY SURGICAL</h2></center>
-    <div id="divide">
-      
-    <table class="table" id="example">
-      <thead>
-        <tr>
-          
+         <h6 style="color: blue">Token:{{$orders->token->name}}</h6>
+         <h6 style="color: blue">Name:{{$orders->cname}}</h6>
+       <h6 style="color: red">phone:{{$orders->cphone}}</h6>
+        <h6 style="color: green">Advance:{{$orders->advance}}</h6>
+       <p style="color: brown">Date:<small>{{$orders->date}}</small></p>
+       <br>
+            
+            </td>
+
+<td> <a href="" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+
+
+ 
+ 
+           
+            <tr>
+           
              <th>id</th>
                <th>Product Name</th>
                <th>Product Quantity</th>
                <th>Product Size</th>
+              
                
-             
-               <th>Date</th>
-               
-               
-               
+              
+              
+              
+              
                <th>Color</th>
-               
-<th>   Cleaning</th>
-<th>Send to Coating</th>
+               <th>Serial Number</th>
+              
+<th>Shift to Cleaning</th>
+<th>Status Coating</th>
 <th>Status Finish</th>
 
 
@@ -39,31 +57,25 @@
                 
           
         </tr>
-      </thead>
-      <tbody>
-       
-       
-      
-       
-     
-        
-        
-           @foreach($unclean as $cls)
+
+            @foreach($unclean as $cls)
+
+@if($cls->customer_id==$orders->id)
+
             <tr>
                 <td>{{$cls->id}}</td>
                 <td>{{$cls->pname}}</td>
                 <td>{{$cls->pquantity}}</td>
                 <td>{{$cls->psize}}</td>
-             
+                
                
-                <td>{{$cls->date}}</td>
+               
                 
-              
-              
-                <td>{{$cls->color_id}}</td>
+             
                 
-                
-              @if($cls->status_cleaning==null)
+                <td>{{$cls->color->name}}</td>
+                <td>{{$cls->serial->name}}</td>
+            @if($cls->status_cleaning==null)
                <td><input type="checkbox" name="shiftcleaning"></td>
                @else
                <td><h6 style="color: green">Recieved for cleaning</h6> </td>
@@ -78,7 +90,7 @@
 
               
                @endif
-              @if($cls->status_coating==null)
+              @if($cls->status_finish==null)
 <td><h6 style="color: red"> Not finished</h6></td>
 @else
 
@@ -87,26 +99,29 @@
 
 
 
-
-
                         @if(Auth::User()->hasrole('admin'))
         
       
 <td>
                 <a href="" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>
+                <a href="{{route('getstore.invoice',$cls->id)}}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-wrench"></i> invoice</a>
              
                </td>
               @endif
             </tr>
+            @endif
            @endforeach
                
-       
-      </tbody>
-    </table>
-    </div>
-    
-   </div>
+            
 
+        
+
+
+@endforeach
+    </tbody>
+    
+  
+</table>
 <script type="text/javascript">
   
   $(document).ready(function() {

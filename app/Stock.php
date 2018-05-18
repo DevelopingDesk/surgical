@@ -12,7 +12,5 @@ class Stock extends Model
      public  function serial() {
         return $this->belongsTo('App\Serial', 'serial_id');
     }
-     public  function token() {
-        return $this->belongsTo('App\Token', 'token_id');
-    }
+    
 }

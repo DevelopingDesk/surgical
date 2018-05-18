@@ -4,20 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Stock;
+use App\Customer;
 class CleaningController extends Controller
 {
     public function clean(){
-
+$Customer=Customer::all();
 $clean=Stock::where('status_coating','!=',null)->get();
-return view('Cleaning.clean')->withclean($clean);
+return view('Cleaning.clean')->withclean($clean)->withcustomer($Customer);
 
 
     }
     public function unClean(){
-
-$unclean=Stock::whereNull('status_coating')->get();
+$Customer=Customer::all();
+$unclean=Stock::whereNotNull('status_cleaning')->get();
 //dd($unclean);
-return view('Cleaning.unclean')->withunclean($unclean);
+return view('Cleaning.unclean')->withunclean($unclean)->withcustomer($Customer);
 
 
     }

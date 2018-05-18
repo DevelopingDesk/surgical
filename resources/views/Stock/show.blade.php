@@ -2,37 +2,43 @@
 
 @section('content')
 
+<h2 style="color: green;text-align: center;"> <b>Stock List</h2>
+<table class="table table-hover" style="margin:10px">
+    <thead style="background-color:white">
+       
+    </thead>
+<tbody>
 
-<div class="table-responsive"  data-example-id="contextual-table" >
-    <button class="btn btn-primary pull-right" onclick="printContent('divide')">print</button>	
+     @foreach($customer as $orders) 
+ 
+       <td>
 
-    <center><h2 style="color: red;margin-top: 10px">MAIN INDUSTRY SURGICAL</h2></center>
-    <div id="divide">
-      
-    <table class="table" id="example">
-      <thead>
-        <tr>
-          
+         <h6 style="color: blue">Token:{{$orders->token->name}}</h6>
+         <h6 style="color: blue">Name:{{$orders->cname}}</h6>
+       <h6 style="color: red">phone:{{$orders->cphone}}</h6>
+        <h6 style="color: green">Advance:{{$orders->advance}}</h6>
+       <p style="color: brown">Date:<small>{{$orders->date}}</small></p>
+       <br>
+            
+            </td>
+
+<td> <a href="" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
+
+
+ 
+       <tr>
+           
              <th>id</th>
                <th>Product Name</th>
                <th>Product Quantity</th>
-               <th>Product Size</th>
-               <th>Customer Name</th>
-               <th>Customer Phone</th>
-               <th>Date</th>
-               <th>Receipt Number</th>
-               <th>Location</th>
-               <th>Advance</th>
+               <th>Product Size</th> 
                <th>Color</th>
                <th>Serial Number</th>
-               <th>Token Number</th>
-<th>Shift to Cleaning</th>
-<th>Status Coating</th>
-<th>Status Finish</th>
-
-
-
-                
+              
+              <th>Shift to Cleaning</th>
+                  <th>Status Coating</th>
+                 <th>Status Finish</th>
+           
                         @if(Auth::User()->hasrole('admin'))
                 
                 <th>Action</th>
@@ -40,30 +46,20 @@
                 
           
         </tr>
-      </thead>
-      <tbody>
-       
-       
-      
-       
-     
-        
-        
+
            @foreach($stock as $cls)
+
+@if($cls->customer_id==$orders->id)
+
             <tr>
                 <td>{{$cls->id}}</td>
                 <td>{{$cls->pname}}</td>
                 <td>{{$cls->pquantity}}</td>
                 <td>{{$cls->psize}}</td>
-                <td>{{$cls->cname}}</td>
-                <td>{{$cls->cphone}}</td>
-                <td>{{$cls->date}}</td>
-                <td>{{$cls->rnumber}}</td>
-                <td>{{$cls->location}}</td>
-                <td>{{$cls->advance}}</td>
-                <td>{{$cls->color->name}}</td>
+                
+              <td>{{$cls->color->name}}</td>
                 <td>{{$cls->serial->name}}</td>
-                <td>{{$cls->token->name}}</td>
+             
               @if($cls->status_cleaning==null)
                <td><input type="checkbox" name="shiftcleaning" value="{{$cls->id}}"></td>
                @else
@@ -98,15 +94,19 @@
                </td>
               @endif
             </tr>
+            @endif
            @endforeach
                
-       
-      </tbody>
-    </table>
-    </div>
-    
-   </div>
+            
 
+        
+
+
+@endforeach
+    </tbody>
+    
+  
+</table>
 <script type="text/javascript">
   
   $(document).ready(function() {
