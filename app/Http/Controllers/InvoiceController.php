@@ -6,31 +6,33 @@ use Illuminate\Http\Request;
 use App\Stock;
 use App\Token;
 use App\Serial;
+use App\Customer;
 
 class InvoiceController extends Controller
 {
     public function create($id){
-$stk=Stock::where('id',$id)->first();
+    	$customer=Customer::where('id',$id)->first();
+$stk=Stock::where('customer_id',$id)->get();
 
-return view('Invoice.create')->withinvoice($stk);
+return view('Invoice.create')->withstore($stk)->withcustomer($customer);
     	
     }
     public function getStore($id){
-
-$invoice=Stock::where('id',$id)->first();
-return view('Invoice.store')->withinvoice($invoice);
+$customer=Customer::where('id',$id)->first();
+$invoice=Stock::where('customer_id',$id)->get();
+//dd($invoice);
+return view('Invoice.store')->withstore($invoice)->withcustomer($customer);
 
     }
     public function postStore(Request $request){
 
-$invoice=Stock::where('id',$request->id)->first();
+$customer=Customer::where('id',$request->id)->first();
 
-$token=Token::where('id',$invoice->token_id)->first();
+$token=Token::where('id',$customer->token_id)->first();
 $token->status=null;
-$serial=Serial::where('id',$invoice->token_id)->first();
-$serial->status=null;
+
 $token->update();
-$serial->update();
+
 
 
 return redirect()->route('create.invoice', ['id' => $request->id]);

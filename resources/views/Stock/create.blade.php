@@ -127,11 +127,11 @@ input[type=text] {
 
 	
 <script type="text/javascript">
-	
-$('#save').on('click',function(){
-
-
-$('#add').append('<div class="col-md-12"><div class="col-md-3" >'+
+$(document).ready(function(){
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('#save'); //Add button selector
+    var wrapper = $('#add'); //Input field wrapper
+    var fieldHTML = '<div class="col-md-12"  ><a href="javascript:void(0);" class="remove_button" title="Remove field"><img src="https://cdn.iconscout.com/public/images/icon/premium/png-512/mathematical-symbol-multiplication-times-sign-dimension-maths-arithmetic-wrong-delete-deny-cancel-3a451628782d1f67-512x512.png" width="20px"/></a><br> <div class="col-md-3" >'+
 		
 '<input type="text" name="pname[]" placeholder="product name" >'+
 	'</div>'+
@@ -152,10 +152,23 @@ $('#add').append('<div class="col-md-12"><div class="col-md-3" >'+
 									'@endforeach'+
 								'</select>'+
 									
-								'</div> </div><br>');
-
+								'</div> </div><br>'; //New input field html 
+    var x = 1; //Initial field counter is 1
+    $(addButton).click(function(){ //Once add button is clicked
+        if(x < maxField){ //Check maximum number of input fields
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); // Add field html
+        }
+    });
+    $(wrapper).on('click', '.remove_button', function(e){ //Once remove button is clicked
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });
 });
-	
 </script>
+
+
+
 
 @endsection

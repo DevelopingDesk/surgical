@@ -23,8 +23,8 @@
             </td>
 
 <td> <a href="" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a></td>
-
-
+<td><a href="{{route('getstore.invoice',$orders->id)}}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-wrench"></i> invoice</a>
+</td>
  
        <tr>
            
@@ -89,7 +89,7 @@
       
 <td>
                 <a href="" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>
-                <a href="{{route('getstore.invoice',$cls->id)}}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-wrench"></i> invoice</a>
+                
              
                </td>
               @endif

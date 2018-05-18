@@ -178,17 +178,7 @@
                         @endif
                    
                         @if(Auth::User()->hasrole('admin'))
-                           <li>
-                            <a href="#"><i class="fa fa-laptop nav_icon"></i>Invoice<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{route('create.stock')}}">Generate Invoice</a>
-                                </li>
-                              
-                               
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                          
                          <li>
                             <a href="#"><i class="fa fa-laptop nav_icon"></i>Stocks<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

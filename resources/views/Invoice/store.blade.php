@@ -154,7 +154,7 @@ input[type=text] {
     <link rel="stylesheet" href="style.css" media="all" />
   </head>
   <form action="{{route('poststore.invoice')}}" method="post"> 
-  	<input type="hidden" name="id" value="{{$invoice->id}}">
+  	<input type="hidden" name="id" value="{{$customer->id}}">
 {{csrf_field()}}
   <body style="margin-left: : 15px;>
     <header class="clearfix">
@@ -167,11 +167,11 @@ input[type=text] {
         <div><a href="mailto:company@example.com">maininstruments@gmail.com</a></div>
       </div>
       <div id="project" style="margin-left: 40px">
-        <div><span style="color: blue">PRODUCT</span>{{$invoice->pname}} </div>
-        <div><span  style="color: blue">CLIENT</span> {{$invoice->cname}}</div>
-        <div><span  style="color: blue">Phone</span>+92343434344</div>
-        <div><span  style="color: blue">EMAIL</span> <a href="mailto:john@example.com">maininstruments@gmail.com</a></div>
-        <div><span  style="color: blue">DATE</span> {{$invoice->date}}</div>
+        <div><span style="color: blue">Token</span>{{$customer->token->name}} </div>
+        <div><span  style="color: blue">CLIENT</span> {{$customer->cname}}</div>
+        <div><span  style="color: blue">Phone</span>{{$customer->cphone}}</div>
+       
+        <div><span  style="color: blue">DATE</span> {{$customer->date}}</div>
         
       </div>
     </header>
@@ -179,23 +179,28 @@ input[type=text] {
       <table>
         <thead>
           <tr  style="background-color:#06d995;color: white">
+            <th class="service">Id</th>
             <th class="service">Product</th>
             <th class="desc">Quantity</th>
-            <th>Size</th>
-            <th>Date</th>
-            <th>Advance</th>
+            <th class="desc">Size</th>
+          
+           
           </tr>
         </thead>
         <tbody>
+          @if($store!=null)
+         @foreach($store as $in)
           <tr>
-            <td class="service">{{$invoice->pname}}</td>
-            <td class="desc">{{$invoice->pquantity}}</td>
-            <td class="unit">{{$invoice->psize}}</td>
-            <td class="qty">{{$invoice->date}}</td>
-            <td class="qty">{{$invoice->advance}}Rs</td>
+           <td class="service">{{$in->id}}</td>
+           <td class="service">{{$in->pname}}</td>
+            <td class="desc">{{$in->pquantity}}</td>
+            <td class="desc">{{$in->psize}}</td>
+           
             
           </tr>
-          
+        
+          @endforeach
+            @endif
           
          
         </tbody>

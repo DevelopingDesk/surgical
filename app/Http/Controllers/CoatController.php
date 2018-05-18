@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Stock;
+use App\Serial;
 use App\Customer;
 class CoatController extends Controller
 {
@@ -26,9 +27,15 @@ return view('Coating.uncoated')->withuncoat($uncoat)->withcustomer($customer);
 
 
 $rec=Stock::where('id',$_POST['orderid'])->first();
-
 $rec->status_finish=1;
+
+
+$serial=Serial::where('id',1)->first();
+$serial->status=null;
+$serial->update();
 $rec->update();
+
+//return response($serial);
 return response("product coated successfully");
     }
 }
